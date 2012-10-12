@@ -17,5 +17,6 @@ exports.COMMUNICATION_EXAMPLE_PAYLOAD_HELLO = "hello";
 exports.COMMUNICATION_TARGET_EXAMPLE = "example";
 
 
-// General Variables
+// General Constants
+exports.COMMUNICATION_SOCKET_SERVER = "server";
 exports.LOCALE_DEFAULT = "default";

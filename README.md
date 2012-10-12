@@ -1,4 +1,4 @@
-SocketSkeleton: A Skeleton for my SocketIO Applications
+OpenedCaptions: A SocketIO API for live TV closed captions.
 =============
 
 This document explains how to set up the code.
@@ -19,6 +19,7 @@ Setting up the client and backend
 1. Install the Mongoose module (http://mongoosejs.com/)
 1. Install the SocketIO module (http://socket.io/)
 1. Install the node-uuid module (https://github.com/broofa/node-uuid/)
+1. Install the serialport module (https://github.com/voodootikigod/node-serialport/blob/master/README.md)
 1. Create a local config file
 		cp config.default.js config.js
 		vi config.js
