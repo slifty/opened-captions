@@ -116,10 +116,6 @@ Variable Naming
 Variable names are camelCase.  This includes acronyms -- "ID" is "Id" and "URL" is "Url"
 An attribute can only be called "id" if it is the id of that object.  If it refers to the id of another object it should be "[objectType]Id" e.g. "gameId" or "playerId"
 
-ViewPorts
--------------
-Client side objects that have a visual element are rendered through ViewPorts.  ViewPorts should be given a DOM object with no frills attached -- classes, ids, attributes, etc. should all be assigned as part of the rendering logic not in the code that created the pane.
-
 
 Licensing
 =============
