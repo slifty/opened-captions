@@ -11,15 +11,13 @@ Installing
 Setting up the client and backend
 
 1. Install Node.js (http://nodejs.org/)
-1. Install MongoDB (http://www.mongodb.org/)
 1. Using a terminal, navigate to the the same directory as this README)
 1. Install the Express module (http://expressjs.com/guide.html)
 1. Install the Jade module (https://github.com/visionmedia/jade#readme)
-1. Install the MongoDB module (http://www.mongodb.org/display/DOCS/node.JS)
-1. Install the Mongoose module (http://mongoosejs.com/)
-1. Install the SocketIO module (http://socket.io/)
+1. Install the socket.io module (http://socket.io/)
 1. Install the node-uuid module (https://github.com/broofa/node-uuid/)
 1. Install the serialport module (https://github.com/voodootikigod/node-serialport/blob/master/README.md)
+1. Install the socket.io-client module (https://github.com/LearnBoost/socket.io-client)
 1. Create a local config file
 		cp config.default.js config.js
 		vi config.js

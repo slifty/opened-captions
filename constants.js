@@ -19,6 +19,9 @@ exports.COMMUNICATION_SOCKET_BROADCAST = "broadcast";
 exports.COMMUNICATION_SOCKET_SERVER = "server";
 exports.LOCALE_DEFAULT = "default";
 
+exports.STREAM_TYPE_SERIAL = "serial";
+exports.STREAM_TYPE_SOCKET = "socket";
+
 
 // Targets
 exports.COMMUNICATION_TARGET_TRANSCRIPT = "transcript";

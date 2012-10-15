@@ -17,7 +17,8 @@ var communication = require('./server/communication');
 
 var app = express(),
 	fs = require('fs'),
-	io = require('socket.io');
+	io = require('socket.io'),
+	ioClient = require('socket.io-client')
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -44,7 +45,6 @@ var server = http.createServer(app).listen(app.get('port'), function() {
 
 io = io.listen(server);
 
-
 // Shared Content
 app.get("/constants.js", function(req, res) { res.sendfile('./constants.js'); });
 app.get("/payloads.js", function(req, res) { res.sendfile('./payloads.js'); });
@@ -60,7 +60,8 @@ app.get("/locales/:language", function(req, res) {
 	});
 });
 
-// Socket.IO
+
+// Socket.IO Server
 io.sockets.on('connection', function (socket) {
 	socket.locale = constants.LOCALE_DEFAULT;
 
@@ -73,21 +74,28 @@ io.sockets.on('connection', function (socket) {
 	});
 });
 
-// Serial Port
-var SerialPort = require("serialport").SerialPort
-var textGrabber = new SerialPort("/dev/tty.usbserial-FTBZ0DJP", {
-	baudrate: 9600,
-	databits: 8,
-	stopbits: 1
-});
 
-textGrabber.on("data", function (data) {
-	var contentIn = new payloads.TranscriptContentInPayload(data);
-	communication.routeMessage(
-		constants.COMMUNICATION_TARGET_TRANSCRIPT,
-		contentIn.getPayload(),
-		constants.COMMUNICATION_SOCKET_SERVER);
-});
+// Transcript Stream
+
+if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
+	// Serial Port
+	var SerialPort = require("serialport").SerialPort
+	var textGrabber = new SerialPort(config.stream.location, {
+		baudrate: 9600,
+		databits: 8,
+		stopbits: 1
+	});
+
+	textGrabber.on("data", function (data) {
+		var contentIn = new payloads.TranscriptContentInPayload(data);
+		communication.routeMessage(
+			constants.COMMUNICATION_TARGET_TRANSCRIPT,
+			contentIn.getPayload(),
+			constants.COMMUNICATION_SOCKET_SERVER);
+	});
+} else if(config.stream.type == constants.STREAM_TYPE_SOCKET) {
+	ioClient = ioClient.connect(config.stream.localhost);
+}
 
 
 // Exports

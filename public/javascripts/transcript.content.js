@@ -1,7 +1,5 @@
-var TranscriptContent = Visible.extend({
+var TranscriptContent = Class.extend({
 	init: function() {
-		this._super();
-		
 		this.id = "";
 		this.body = "";
 	},

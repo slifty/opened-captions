@@ -78,10 +78,8 @@ var Transcript = Class.extend({
 		this.contents.push(content);
 		
 		var output = $('<li />')
-			.appendTo(this.contentList);
-		
-		var viewport = new Viewport(output, VIEWPORT_TRANSCRIPT_CONTENTLIST);
-		content.render(viewport);
+			.appendTo(this.contentList)
+			.text(content.body);
 	}
 	
 });
