@@ -3,20 +3,26 @@ if(typeof(window) != "undefined") {
 } else {
 }
 
+
+// Custom Payloads
+exports.COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT = "content";
+
+
 // General Payloads
 exports.COMMUNICATION_GENERAL_PAYLOAD_ACTIVATE = "activate";
 exports.COMMUNICATION_GENERAL_PAYLOAD_DEACTIVATE = "deactivate";
 exports.COMMUNICATION_GENERAL_PAYLOAD_ERROR = "error";
 
 
-// Custom Payloads
-exports.COMMUNICATION_EXAMPLE_PAYLOAD_HELLO = "hello";
+// General Constants
+exports.COMMUNICATION_SOCKET_BROADCAST = "broadcast";
+exports.COMMUNICATION_SOCKET_SERVER = "server";
+exports.LOCALE_DEFAULT = "default";
 
 
 // Targets
-exports.COMMUNICATION_TARGET_EXAMPLE = "example";
+exports.COMMUNICATION_TARGET_TRANSCRIPT = "transcript";
 
 
-// General Constants
-exports.COMMUNICATION_SOCKET_SERVER = "server";
-exports.LOCALE_DEFAULT = "default";
+// Viewports
+exports.VIEWPORT_TRANSCRIPT_CONTENTLIST = "transcript-contentlist";
