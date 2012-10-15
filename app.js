@@ -68,7 +68,6 @@ io.sockets.on('connection', function (socket) {
 
 
 // Transcript Stream
-
 if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
 	// Serial Port
 	var SerialPort = require("serialport").SerialPort
@@ -86,7 +85,16 @@ if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
 			constants.COMMUNICATION_SOCKET_SERVER);
 	});
 } else if(config.stream.type == constants.STREAM_TYPE_SOCKET) {
-	ioClient = ioClient.connect(config.stream.localhost);
+	ioClient = ioClient.connect(config.stream.localhost, {
+		port: config.stream.port
+	});
+	ioClient.on('connect', function() {
+		console.log("Connected to stream");
+	});
+	ioClient.on('message', function(message) {
+		console.log('message');
+		communication.sendMessage(message.target, message.payload, constants.COMMUNICATION_SOCKET_BROADCAST);
+	});
 }
 
 
