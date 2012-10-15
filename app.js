@@ -99,7 +99,7 @@ if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
 			constants.COMMUNICATION_SOCKET_SERVER);
 	});
 } else if(config.stream.type == constants.STREAM_TYPE_SERVER) {
-	ioClient = ioClient.connect(config.stream.localhost, {
+	ioClient = ioClient.connect(config.stream.location, {
 		port: config.stream.port
 	});
 	ioClient.on('connect', function() {
@@ -112,7 +112,7 @@ if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
 
 // Proxy Mode
 if(config.proxy.mode == constants.PROXY_MODE_ENABLED) {
-	ioProxy = ioClient.connect(config.proxy.localhost, {
+	ioProxy = ioClient.connect(config.proxy.location, {
 		port: config.proxy.port
 	});
 	ioProxy.on('connect', function() {
