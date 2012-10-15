@@ -19,26 +19,6 @@ exports.ErrorPayload = function(content) {
 	};
 };
 
-exports.ActivatePayload = function(content) {
-	this.getPayload = function() {
-		return {
-			type: constants.COMMUNICATION_GENERAL_PAYLOAD_ACTIVATE,
-			data: {
-			}
-		}
-	};
-};
-
-exports.DeactivatePayload = function(content) {
-	this.getPayload = function() {
-		return {
-			type: constants.COMMUNICATION_GENERAL_PAYLOAD_DEACTIVATE,
-			data: {
-			}
-		}
-	};
-};
-
 
 // Module Payloads
 exports.TranscriptContentInPayload = function(body) {
@@ -58,6 +38,54 @@ exports.TranscriptContentOutPayload = function(body) {
 	this.getPayload = function() {
 		return {
 			type: constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT,
+			data: {
+				body: this.body
+			}
+		}
+	};
+};
+
+exports.TranscriptLineInPayload = function(body) {
+	this.body = body;
+	this.getPayload = function() {
+		return {
+			type: constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_LINE,
+			data: {
+				body: this.body
+			}
+		}
+	};
+};
+
+exports.TranscriptLineOutPayload = function(body) {
+	this.body = body;
+	this.getPayload = function() {
+		return {
+			type: constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_LINE,
+			data: {
+				body: this.body
+			}
+		}
+	};
+};
+
+exports.TranscriptWordInPayload = function(body) {
+	this.body = body;
+	this.getPayload = function() {
+		return {
+			type: constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_WORD,
+			data: {
+				body: this.body
+			}
+		}
+	};
+};
+
+exports.TranscriptWordOutPayload = function(body) {
+	this.body = body;
+	this.getPayload = function() {
+		return {
+			type: constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_WORD,
 			data: {
 				body: this.body
 			}

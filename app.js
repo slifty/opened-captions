@@ -52,8 +52,11 @@ app.get("/locales/:language", function(req, res) {
 	});
 });
 
+// Proxy 
+exports.verifiedProxyIds = [];
 
 // Socket.IO Server
+io.set('log level', 1);
 io.sockets.on('connection', function (socket) {
 	socket.locale = constants.LOCALE_DEFAULT;
 
@@ -62,7 +65,17 @@ io.sockets.on('connection', function (socket) {
 	});
 	
 	socket.on('message', function (payload) {
-		game_routes.receiveMessage(payload, socket);
+		communication.receiveMessage(payload, socket);
+	});
+	
+	socket.on('proxy', function (secret) {
+		if(config.proxy.secret != secret) {
+			console.log("Failed proxy attempt.");
+			return;
+		}
+			
+		console.log("New proxy connected");
+		exports.verifiedProxyIds.push(socket.id);
 	});
 });
 
@@ -76,15 +89,16 @@ if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
 		databits: 8,
 		stopbits: 1
 	});
-
+	
 	textGrabber.on("data", function (data) {
+		data = data.toString();
 		var contentIn = new payloads.TranscriptContentInPayload(data);
 		communication.routeMessage(
 			constants.COMMUNICATION_TARGET_TRANSCRIPT,
 			contentIn.getPayload(),
 			constants.COMMUNICATION_SOCKET_SERVER);
 	});
-} else if(config.stream.type == constants.STREAM_TYPE_SOCKET) {
+} else if(config.stream.type == constants.STREAM_TYPE_SERVER) {
 	ioClient = ioClient.connect(config.stream.localhost, {
 		port: config.stream.port
 	});
@@ -92,9 +106,20 @@ if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
 		console.log("Connected to stream");
 	});
 	ioClient.on('message', function(message) {
-		console.log('message');
 		communication.sendMessage(message.target, message.payload, constants.COMMUNICATION_SOCKET_BROADCAST);
 	});
+}
+
+// Proxy Mode
+if(config.proxy.mode == constants.PROXY_MODE_ENABLED) {
+	ioProxy = ioClient.connect(config.proxy.localhost, {
+		port: config.proxy.port
+	});
+	ioProxy.on('connect', function() {
+		console.log("Connected to proxy");
+		ioProxy.emit('proxy', config.proxy.secret); // Let the server know you are legitimate
+	})
+	exports.ioProxy = ioProxy;
 }
 
 

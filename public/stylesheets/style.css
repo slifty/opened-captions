@@ -7,9 +7,11 @@ a {
   color: #00B7FF;
 }
 
-ul {
-	list-style:none;
-}
-li {
-	float: left;
+
+div.stream {
+	border: 1px solid black;
+	height: 200px;
+	margin: 10px;
+	overflow: auto;
+	width: 500px;
 }

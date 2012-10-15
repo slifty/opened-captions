@@ -4,13 +4,6 @@ var Communication = Class.extend({
 		this.socket.on('message', this.receiveMessage);
 	},
 	
-	sendMessage: function(target, payload) {
-		this.socket.emit('message', {
-			target: target,
-			payload: payload
-		});
-	},
-	
 	receiveMessage: function(message) {
 		var communicationTarget = message.target;
 		switch(message.target) {
@@ -19,13 +12,6 @@ var Communication = Class.extend({
 				break;
 		}
 	},
-	
-	routeMessage: function(target, payload) {
-		this.receiveMessage({
-			target: target,
-			payload: payload
-		});
-	}
 });
 
 $(function() {

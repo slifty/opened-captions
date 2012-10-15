@@ -2,6 +2,7 @@ var app = require('../app'),
 	transcript = require('./transcript');
 
 var classes = require('./classes'),
+	config = require('../config'),
 	constants = require('../constants'),
 	payloads = require('../payloads');
 
@@ -9,6 +10,10 @@ var classes = require('./classes'),
 exports.receiveMessage = function(message, socket) {
 	if(!message.payload || !message.payload.data)
 		return; // Invalid payload
+	
+	// Proxy the message
+	if(config.proxy.mode == constants.PROXY_MODE_ENABLED)
+		exports.sendMessage(message.target, message.payload, app.ioProxy)
 	
 	// Route the message
 	switch(message.target) {
