@@ -69,7 +69,7 @@ io.sockets.on('connection', function (socket) {
 	});
 	
 	socket.on('proxy', function (secret) {
-		if(config.proxy.secret != secret) {
+		if(config.stream.secret != secret) {
 			console.log("Failed proxy attempt.");
 			return;
 		}
