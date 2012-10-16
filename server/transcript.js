@@ -37,7 +37,7 @@ function handleContent(data, socket) {
 	lineBuffer = lineBuffer + data.body; // inefficient -- I don't care right now.
 	wordBuffer = wordBuffer + data.body; // inefficient -- I don't care right now.
 	var lineBreakpoint = lineBuffer.indexOf("\n");
-	var wordBreakpoint = wordBuffer.indexOf(' ');
+	var wordBreakpoint = wordBuffer.search(/\s/);
 	
 	if(lineBreakpoint != -1) {
 		var content = lineBuffer.slice(0, lineBreakpoint);
