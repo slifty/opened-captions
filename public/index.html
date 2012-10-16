@@ -20,12 +20,12 @@
 			<a href="https://github.com/slifty/opened-captions"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 			<h1>Opened Captions</h1>
 			<p>This is the very basic Opened Captions tech demo.  If the server is properly connected to a live caption stream then you should start to see text streaming across the three windows below.</p>
-			<p>What's happening is that your browser is getting content updates from the server located in the address you just typed into your web browser.  That server is linked to a caption stream (maybe the stream is coming from a TV directly, or <em>maybe it is coming from another Opened Captions server elsewhere in the universe, like the one on openedcaption).  The point is that the words have somehow wound up right in front of you.</p>
+			<p>What's happening is that your browser is getting content updates from the server located in the address you just typed into your web browser.  That server is linked to a caption stream (maybe the stream is coming from a TV directly, or maybe it is coming from another Opened Captions server elsewhere in the universe, like the one on openedcaption).  The point is that the words have somehow wound up right in front of you.</p>
 			<p>Right now there are three types of events, which are represented by the three windows.</p>
 			<p><strong>The first window</strong> shows the result of the "content" event.  As soon as the characters are typed in by C-SPAN staff, they are broadcast by Opened Captions and rendered in your browser.  These are useful for a more "fluid" feeling.</p>
 			<p><strong>The second window</strong> shows the result of the "word" event.  The server buffers the content until it notices whitespace, at which point it broadcasts the fact that a new word has been spoken.</p>
 			<p><strong>The third window</strong> shows the "line" event.  The server buffers the content until it notices a line break, which would on a TV would result in a new closed captioning line.</p>
-			<p>This last part is REALLY important.  <strong>You can have this exact page, with a streaming transcript feed, serving from localhost, in <em>under five minutes</em> without relying on anything but the Internet.</strong></p>
+			<p>This last part is REALLY important.  You can have this exact page, with a streaming transcript feed, serving from localhost, in <em>under five minutes</em> without relying on anything but the Internet.</p>
 			<div id="demo"></div>
 		</div>
 	</body>
