@@ -26,11 +26,7 @@ Setting up the client and backend
 Starting the Server
 -------------
 
-1. start the mongo daemon
-
-    mongod
-
-2. start the node server
+1. start the node server
 
     node app.js
 
