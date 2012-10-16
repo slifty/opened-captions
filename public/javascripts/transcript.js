@@ -49,7 +49,7 @@ var Transcript = Class.extend({
 	},
 	lineOut: function(data) {
 		var output = $('<span />')
-			.text(data.body)
+			.text(data.body + " ")
 			.appendTo(this.lines);
 		this.lines.scrollTop(this.lines.prop("scrollHeight"));
 	},
