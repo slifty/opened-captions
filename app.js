@@ -73,7 +73,7 @@ io.sockets.on('connection', function (socket) {
 			console.log("Failed proxy attempt.");
 			return;
 		}
-			
+		
 		console.log("New proxy connected");
 		exports.verifiedProxyIds.push(socket.id);
 	});
@@ -106,7 +106,13 @@ if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
 		console.log("Connected to stream");
 	});
 	ioClient.on('message', function(message) {
-		communication.sendMessage(message.target, message.payload, constants.COMMUNICATION_SOCKET_BROADCAST);
+		if(message.payload.type == constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT) {
+			var contentIn = new payloads.TranscriptContentInPayload(message.payload.data.body);
+			communication.routeMessage(
+				constants.COMMUNICATION_TARGET_TRANSCRIPT,
+				contentIn.getPayload(),
+				constants.COMMUNICATION_SOCKET_SERVER);
+		}
 	});
 }
 
