@@ -5,24 +5,24 @@ var Transcript = Class.extend({
 		// Module console
 		var title = $('<h1 />')
 			.text(localization[LOCALE].gui.transcript.CONTENT)
-			.appendTo($('body'))
+			.appendTo($('#demo'))
 			
 		var contents = $('<div />')
 			.attr('id','contents')
 			.addClass('stream')
-			.appendTo($('body'));
+			.appendTo($('#demo'));
 		this.contents = contents;
 		
 		var words = $('<div />')
 			.attr('id','words')
 			.addClass('stream')
-			.appendTo($('body'))
+			.appendTo($('#demo'))
 		this.words = words;
 		
 		var lines = $('<div />')
 			.attr('id','lines')
 			.addClass('stream')
-			.appendTo($('body'))
+			.appendTo($('#demo'))
 		this.lines = lines;
 	},
 	

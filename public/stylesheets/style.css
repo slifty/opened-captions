@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #cdc;
 }
 
 a {
@@ -14,4 +15,14 @@ div.stream {
 	margin: 10px;
 	overflow: auto;
 	width: 500px;
+}
+
+#content {
+	width: 800px;
+	margin: auto;
+}
+
+div.stream {
+	background-color: #fff;
+	padding: 10px;
 }
