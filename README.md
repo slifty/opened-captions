@@ -20,6 +20,8 @@ Setting up the client and backend
 1. Install the socket.io-client module (https://github.com/LearnBoost/socket.io-client)
 1. Create a local config file
 		cp config.default.js config.js
+		
+1. (Optional) Edit the config file
 		vi config.js
 
 
