@@ -11,13 +11,16 @@ Installing
 Setting up the client and backend
 
 **OPTION 1: Scripted Install**
+
+1. Fork https://github.com/slifty/opened-captions
 1. Install Node.js (http://nodejs.org/)
-1. Using a terminal, navigate to the the same directory as this README)
+1. Using a terminal, navigate to the the same directory as this README
 1. Run the install script
 		./install.sh
 
-**OPTION 1: Manual Install**
+**OPTION 2: Manual Install**
 
+1. Fork https://github.com/slifty/opened-captions
 1. Install Node.js (http://nodejs.org/)
 1. Using a terminal, navigate to the the same directory as this README)
 1. Install the Express module (http://expressjs.com/guide.html)
