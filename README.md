@@ -1,4 +1,4 @@
-OpenedCaptions: A SocketIO API for live TV closed captions.
+OpenedCaptions: A distributed API for live TV closed captions.
 =============
 
 This document explains how to set up the code.
@@ -22,7 +22,7 @@ Setting up the client and backend
 
 1. Fork https://github.com/slifty/opened-captions
 1. Install Node.js (http://nodejs.org/)
-1. Using a terminal, navigate to the the same directory as this README)
+1. Using a terminal, navigate to the the same directory as this README
 1. Install the Express module (http://expressjs.com/guide.html)
 1. Install the Jade module (https://github.com/visionmedia/jade#readme)
 1. Install the socket.io module (http://socket.io/)
@@ -39,89 +39,52 @@ Setting up the client and backend
 Starting the Server
 -------------
 
-1. start the node server
+1. Using a terminal, navigate to the same directory as this README
+1. Start the node server
 
-    node app.js
+    node app
 
 
-Code Conventions
+About the code
 =============
 
-Architecture
+The Server
 -------------
-Communication between modules is done through payloads.
 
-Communication between the client and server is done through messages.
+If all you are doing is creating a front end experience you don't need to worry about this section at all.  If you are interested in understanding how Opened Captions works or modifying your content stream, read on.
 
-The only time you should be calling a module's method directly is if you are routing a payload, or if you are expecting a return value (e.g. "getGameById")
+An Opened Captions server takes a live captions feed and syndicates it.  That feed can currently come in three ways:
 
-If you have a method that should only be triggerable via a payload sent from the server (i.e. it is a server-to-server interaction such as tick()) you should use the constants.PAYLOAD_SOCKET_SERVER constant as the socket, and check for this condition early on.
+1. Directly from a serial port (SERIAL).
+1. Over the network from an existing Opened Captions server (SERVER).
+1. Proxied to the server through a client connection (PROXY).
+
+Regardless of the stream source, each update triggers a "content" payload.  That payload is passed through the server/communication.js message hub and ultimately routed to server/transcript.js where the message is passed into the "handleContent" method.  You can learn about what information the payload contains by viewing payloads.js 
+
+The handleContent method takes the new input and uses it to determine what to broadcast to all connected parties.  This is where a server could process the information in various ways or combine it with other available information.  Regardless of what modifications occur **it is vital that handleContent broadcast a content payload. This is what allows other Opened Captions nodes to re-syndicate the stream from your server.**
+
+Messages are sent from the server through the sendPayload() method in /server/transcript.js.  This method is passed a valid payload.getPayload() (see payloads.js) and the IDs of the intended recipient sockets.
 
 
-Communication Method and Class Naming
+The Client
 -------------
-For the sake of simplicity, function and class names concerning communication are always from the perspective of the server, even in client code.
 
-"In" means the message is going from client->server ("into" the server).
+All client code is located in the /public directory, which is what actually gets served on the web (plus a few "magic" files like socket.io which don't appear there).
 
-"Out" means the message is going server->client ("out" of the server).
+The /public/javascripts/communication.js object gets messages pushed from the server over socket.io.  It then routes the payloads contained in those messages to the appropriate target object.  Transcript payloads are currently the only type, so they all end up being routed to /public/javascripts/transcript.js.  This object then routes the specific payload to its handler (e.g. wordOut, contentOut, lineOut).  These handlers are where you can do cool things -- they are called once for every word / content / line event.
 
-Constants
--------------
-If the value of a constant is in CAPITOL LETTERS it cannot be freely changed.  For example, constants related to player role ("A", "S", etc.) are used as indexes in the localization object to look up text related to those roles.
-
-Function Calls
--------------
-Function calls should generally be on one line, except in the case of the server side's sendMessage, which should have each part on its own line.
-
-jQuery
--------------
-Chain when possible
-
-	.because the code
-
-	.is easier
-
-	.to read
-
-Language and Localization
--------------
-Torwolf has been built from the beginning to be localized (holy crap over-engineering).  Make sure that any language that will end up on a user's screen goes through the locale structure.
-
-To add a language:
-
-cp locales/default.js locales/LANGUAGE.js
-
-where LANGUAGE is the browser's language code (e.g. "en-US")
-
-Note that the language files contain directories.  Generally if a node in the directory contains a string it should be UPPER CASE, if it is just a branch it should be camelCase.
-
-For example...
-
-	exports.dict = {
-		branch: {
-			LEAF_A: "leaf a",
-			LEAF_B: "leaf b"
-		},
-		LEAF_C: "leaf c"
-	}
+There is demo code included in /public/javascripts/transcript.js for you to check out for now.  That should be what you need to go create some awesome stuff!
 
 
-Misc
--------------
-In situations where order is functionally irrelevant, lists of things should be sorted alphabetically.  This means classes, constants, lists of lists (e.g. this sentence), switch statements, variable declarations, etc.
 
-Payloads and Payload handlers
--------------
-Payload handlers should avoid having too much logic except for validation and routing when actually processing the payload data.  For example this means that the target of a message should be included in the payload itself rather than being assumed to be a broadcast.
+Conventions
+=============
 
-Payloads should not contain full objects, but should contain object attributes and object Ids.  This means the client and the server will store their own version of the object with common Ids.
-
-
-Variable Naming
--------------
-Variable names are camelCase.  This includes acronyms -- "ID" is "Id" and "URL" is "Url"
-An attribute can only be called "id" if it is the id of that object.  If it refers to the id of another object it should be "[objectType]Id" e.g. "gameId" or "playerId"
+1. Chain whenever possible
+1. In situations where order is functionally irrelevant, lists of things should be sorted alphabetically.  This means classes, constants, lists of lists (e.g. this sentence), switch statements, variable declarations, etc.
+1. Variable names are camelCase.  This includes acronyms -- "ID" is "Id" and "URL" is "Url"
+1. An attribute can only be called "id" if it is the id of that object.  If it refers to the id of another object it should be "[objectType]Id" e.g. "gameId" or "playerId"
+1. For the sake of simplicity, function and class names concerning communication are always from the perspective of the server, even in client code.  "In" means the message is going from client->server ("into" the server).  "Out" means the message is going server->client ("out" of the server).
 
 
 Licensing

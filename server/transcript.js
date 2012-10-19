@@ -4,10 +4,8 @@ var util = require('util');
 
 var communication = require('./communication');
 
-var classes = require('./classes'),
-	config = require('../config'),
+var config = require('../config'),
 	constants = require('../constants'),
-	locales = require('../locales'),
 	payloads = require('../payloads');
 
 var contentBuffer = "";
@@ -26,7 +24,7 @@ function error(message, socket) {
 // Handlers
 function handleContent(data, socket) {
 	if(socket != constants.COMMUNICATION_SOCKET_SERVER && app.verifiedProxyIds.indexOf(socket.id) == -1)
-		return error(locales[socket.locale].errors.transcript.CONTENT_SYSTEM, socket);
+		return;
 	
 	data.body = String(data.body).replace(/\r/, '');
 	

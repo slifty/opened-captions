@@ -1,8 +1,7 @@
 var app = require('../app'),
 	transcript = require('./transcript');
 
-var classes = require('./classes'),
-	config = require('../config'),
+var config = require('../config'),
 	constants = require('../constants'),
 	payloads = require('../payloads');
 

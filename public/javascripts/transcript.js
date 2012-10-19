@@ -1,66 +1,60 @@
 // Object
-var Transcript = Class.extend({
+var Transcript = function() {
 	
-	init: function() {
-		// Module console
-		var title = $('<h1 />')
-			.text(localization[LOCALE].gui.transcript.CONTENT)
-			.appendTo($('#demo'))
-			
-		var contents = $('<div />')
-			.attr('id','contents')
-			.addClass('stream')
-			.appendTo($('#demo'));
-		this.contents = contents;
-		
-		var words = $('<div />')
-			.attr('id','words')
-			.addClass('stream')
-			.appendTo($('#demo'))
-		this.words = words;
-		
-		var lines = $('<div />')
-			.attr('id','lines')
-			.addClass('stream')
-			.appendTo($('#demo'))
-		this.lines = lines;
-	},
+	// Module console
+	var contents = $('<div />')
+		.attr('id','contents')
+		.addClass('stream')
+		.appendTo($('#demo'));
+	this.contents = contents;
 	
-	receivePayload: function(payload) {
+	var words = $('<div />')
+		.attr('id','words')
+		.addClass('stream')
+		.appendTo($('#demo'))
+	this.words = words;
+	
+	var lines = $('<div />')
+		.attr('id','lines')
+		.addClass('stream')
+		.appendTo($('#demo'))
+	this.lines = lines;
+	
+	this.receivePayload = function(payload) {
 		switch(payload.type) {
 			// Module Payloads
 			case COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT:
-				this.contentOut(payload.data);
+				contentOut(payload.data);
 				break;
 			case COMMUNICATION_TRANSCRIPT_PAYLOAD_LINE:
-				this.lineOut(payload.data);
+				lineOut(payload.data);
 				break;
 			case COMMUNICATION_TRANSCRIPT_PAYLOAD_WORD:
-				this.wordOut(payload.data);
+				wordOut(payload.data);
 				break;
 		}
 	},
 	
-	contentOut: function(data) {
+	contentOut = function(data) {
 		var output = $('<span />')
 			.text(data.body)
-			.appendTo(this.contents);
-		this.contents.scrollTop(this.contents.prop("scrollHeight"));
-	},
-	lineOut: function(data) {
+			.appendTo(contents);
+		contents.scrollTop(contents.prop("scrollHeight"));
+	}
+	lineOut = function(data) {
 		var output = $('<span />')
 			.text(data.body + " ")
-			.appendTo(this.lines);
-		this.lines.scrollTop(this.lines.prop("scrollHeight"));
-	},
-	wordOut: function(data) {
+			.appendTo(lines);
+		lines.scrollTop(lines.prop("scrollHeight"));
+	}
+	wordOut = function(data) {
 		var output = $('<span />')
 			.text(data.body + " ")
-			.appendTo(this.words);
-		this.words.scrollTop(this.words.prop("scrollHeight"));
-	},
+			.appendTo(words);
+		words.scrollTop(words.prop("scrollHeight"));
+	}
 	
-});
+};
 
 $(function() {
 	window.TRANSCRIPT = new Transcript();

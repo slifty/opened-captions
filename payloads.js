@@ -3,7 +3,6 @@ if(typeof(window) != "undefined") {
 	var constants = window;
 } else {
 	constants = require('./constants');
-	locales = require('./locales/default.js');
 }
 
 // Generic Payloads

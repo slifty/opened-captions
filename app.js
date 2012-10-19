@@ -40,17 +40,6 @@ io = io.listen(server);
 // Shared Content
 app.get("/constants.js", function(req, res) { res.sendfile('./constants.js'); });
 app.get("/payloads.js", function(req, res) { res.sendfile('./payloads.js'); });
-app.get("/locales.js", function(req, res) { res.sendfile('./locales.js'); });
-app.get("/locales/:language", function(req, res) {
-	var language = req.param('language').replace(/[^a-zA-Z\-]/g, '');
-	fs.stat('./locales/' + language + '.js', function(err, stats) {
-		if(err == null) {
-			res.sendfile('./locales/' + req.param('language') + '.js');
-		} else {
-			res.sendfile('./locales/default.js');
-		}
-	});
-});
 
 // Proxy 
 exports.verifiedProxyIds = [];

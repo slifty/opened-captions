@@ -21,7 +21,8 @@ exports.COMMUNICATION_SOCKET_SERVER = "server";
 
 
 // Configuration options
+exports.STREAM_TYPE_PROXY = "proxy";
 exports.STREAM_TYPE_SERIAL = "serial";
-exports.STREAM_TYPE_SOCKET = "socket";
+exports.STREAM_TYPE_SERVER = "server";
 exports.PROXY_MODE_DISABLED = "disabled";
 exports.PROXY_MODE_ENABLED = "enabled";
