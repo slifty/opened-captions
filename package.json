@@ -1,6 +1,7 @@
 {
-  "name": "application-name",
+  "name": "opened-captions",
   "version": "0.0.1",
+  "description": "A distributed API for closed captioning live-streams.",
   "private": true,
   "scripts": {
     "start": "node app"
