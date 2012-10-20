@@ -16,6 +16,7 @@ Setting up the client and backend
 1. Install Node.js (http://nodejs.org/)
 1. Using a terminal, navigate to the the same directory as this README
 1. Run the install script
+
 		./install.sh
 
 **OPTION 2: Manual Install**
@@ -30,9 +31,11 @@ Setting up the client and backend
 1. Install the serialport module (https://github.com/voodootikigod/node-serialport/blob/master/README.md)
 1. Install the socket.io-client module (https://github.com/LearnBoost/socket.io-client)
 1. Create a local config file
+
 		cp config.default.js config.js
 		
 1. (Optional) Edit the config file
+
 		vi config.js
 
 
