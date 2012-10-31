@@ -41,6 +41,10 @@ var server = http.createServer(app).listen(app.get('port'), function() {
 });
 
 
+// Prepare Proxy
+exports.verifiedProxies = {};
+
+
 // Start Socket.IO
 io = io.listen(server);
 io.sockets.on('connection', function (socket) {
@@ -57,16 +61,12 @@ io.sockets.on('connection', function (socket) {
 					console.log("Failed proxy attempt.");
 				} else {
 					console.log("New proxy connected");
-					exports.verifiedProxyIds.push(socket.id);
+					exports.verifiedProxies[socket.id] = socket;
 				}
 			}
 		}
 	});
 });
-
-
-// Proxy
-exports.verifiedProxyIds = [];
 
 
 // Configure Socket.IO
@@ -146,7 +146,7 @@ for(var x in config.streams) {
 
 
 // Proxy Mode
-exports.proxies = [];
+exports.proxies = {};
 for(x in config.proxies) {
 	var proxy = config.proxies[x];
 	ioProxy = ioClient.connect(proxy.location, {
@@ -159,7 +159,7 @@ for(x in config.proxies) {
 	ioProxy.on('connect', function() {
 		console.log("Connected to proxy: " + proxy.location + ":" + proxy.port);
 		ioProxy.emit('proxy', proxy.secret); // Let the server know you are a proxy
-		exports.proxies.push(ioProxy);
+		exports.proxies[proxy.location + ":" + proxy.port] = ioProxy;
 	})
 	
 	ioProxy.on('disconnect', function() {

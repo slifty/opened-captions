@@ -23,7 +23,7 @@ function error(message, socket) {
 
 // Handlers
 function handleContent(data, socket) {
-	if(socket != constants.COMMUNICATION_SOCKET_SERVER && app.verifiedProxyIds.indexOf(socket.id) == -1)
+	if(socket != constants.COMMUNICATION_SOCKET_SERVER && typeof(app.verifiedProxies[socket.id]) === "undefined")
 		return;
 	
 	data.body = String(data.body).replace(/\r/, '');
