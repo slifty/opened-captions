@@ -8,9 +8,9 @@ var config = require('../config'),
 // Exports
 exports.receiveMessage = function(message, socket) {
 	if(!message.payload || !message.payload.data)
-		return; // Invalid payload
+		return;
 	
-	// Proxy the message
+	// Pass the message to reverse proxies
 	for(var x in app.proxies) {
 		proxy = app.proxies[x];
 		exports.sendMessage(message.target, message.payload, proxy)

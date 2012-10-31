@@ -49,13 +49,18 @@ io.sockets.on('connection', function (socket) {
 	});
 	
 	socket.on('proxy', function (secret) {
-		if(config.stream.secret != secret) {
-			console.log("Failed proxy attempt.");
-			return;
+		// Check if this is an expected proxy
+		for(var x in config.streams) {
+			var stream = config.streams[x];
+			if(stream.type == constants.STREAM_TYPE_PROXY) {
+				if(stream.secret != secret) {
+					console.log("Failed proxy attempt.");
+				} else {
+					console.log("New proxy connected");
+					exports.verifiedProxyIds.push(socket.id);
+				}
+			}
 		}
-		
-		console.log("New proxy connected");
-		exports.verifiedProxyIds.push(socket.id);
 	});
 });
 
@@ -86,54 +91,57 @@ io.configure('production', function() {
 });
 
 
-// Set up the content stream
-switch(config.stream.type) {
-	case constants.STREAM_TYPE_SERIAL:
-		// Serial Port
-		var SerialPort = require("serialport").SerialPort
-		var textGrabber = new SerialPort(config.stream.location, {
-			baudrate: 9600,
-			databits: 8,
-			stopbits: 1
-		});
-		
-		textGrabber.on("data", function (data) {
-			data = data.toString();
-			var contentIn = new payloads.TranscriptContentInPayload(data);
-			communication.routeMessage(
-				constants.COMMUNICATION_TARGET_TRANSCRIPT,
-				contentIn.getPayload(),
-				constants.COMMUNICATION_SOCKET_SERVER);
-		});
-		break;
-		
-	case constants.STREAM_TYPE_SERVER:
-		ioClient = ioClient.connect(config.stream.location, {
-			port: config.stream.port,
-			reconnect: true,
-			'reconnection delay': 10000,
-			'max reconnection attempts': Infinity
-		});
-		ioClient.on('connect', function() {
-			console.log("Connected to stream");
-		});
-		ioClient.on('message', function(message) {
-			if(message.payload.type == constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT) {
-				var contentIn = new payloads.TranscriptContentInPayload(message.payload.data.body);
+// Set up the content streams
+for(var x in config.streams) {
+	var stream = config.streams[x];
+	switch(stream.type) {
+		case constants.STREAM_TYPE_SERIAL:
+			// Serial Port
+			var SerialPort = require("serialport").SerialPort
+			var textGrabber = new SerialPort(stream.location, {
+				baudrate: 9600,
+				databits: 8,
+				stopbits: 1
+			});
+			
+			textGrabber.on("data", function (data) {
+				data = data.toString();
+				var contentIn = new payloads.TranscriptContentInPayload(data);
 				communication.routeMessage(
 					constants.COMMUNICATION_TARGET_TRANSCRIPT,
 					contentIn.getPayload(),
 					constants.COMMUNICATION_SOCKET_SERVER);
-			}
-		});
-		break;
+			});
+			break;
 		
-	case constants.STREAM_TYPE_PROXY:
-		console.log("Waiting for a proxy");
-		break;
+		case constants.STREAM_TYPE_SERVER:
+			ioClient = ioClient.connect(stream.location, {
+				port: stream.port,
+				reconnect: true,
+				'reconnection delay': 10000,
+				'max reconnection attempts': Infinity
+			});
+			ioClient.on('connect', function() {
+				console.log("Connected to stream");
+			});
+			ioClient.on('message', function(message) {
+				if(message.payload.type == constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT) {
+					var contentIn = new payloads.TranscriptContentInPayload(message.payload.data.body);
+					communication.routeMessage(
+						constants.COMMUNICATION_TARGET_TRANSCRIPT,
+						contentIn.getPayload(),
+						constants.COMMUNICATION_SOCKET_SERVER);
+				}
+			});
+			break;
 		
-	default:
-		console.log("No stream type detected")
+		case constants.STREAM_TYPE_PROXY:
+			console.log("Waiting for a proxy...");
+			break;
+		
+		default:
+			console.log("No stream type detected")
+	}
 }
 
 
@@ -149,10 +157,14 @@ for(x in config.proxy.targets) {
 	});
 	
 	ioProxy.on('connect', function() {
-		console.log("Connected to proxy");
+		console.log("Connected to proxy: " + config.proxy.location + ":" + config.proxy.port);
 		ioProxy.emit('proxy', config.proxy.secret); // Let the server know you are a proxy
+		exports.proxies.push(ioProxy);
 	})
-	exports.proxies.push(ioProxy);
+	
+	ioProxy.on('disconnect', function() {
+		console.log("Disconnected from a proxy: " + config.proxy.location + ":" + config.proxy.port);
+	})
 }
 
 
