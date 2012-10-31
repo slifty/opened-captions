@@ -106,7 +106,7 @@ for(var x in config.streams) {
 			
 			textGrabber.on("data", function (data) {
 				data = data.toString();
-				var contentIn = new payloads.TranscriptContentInPayload(data);
+				var contentIn = new payloads.TranscriptContentPayload(data);
 				communication.routeMessage(
 					constants.COMMUNICATION_TARGET_TRANSCRIPT,
 					contentIn.getPayload(),
@@ -126,7 +126,7 @@ for(var x in config.streams) {
 			});
 			client.on('message', function(message) {
 				if(message.payload.type == constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT) {
-					var contentIn = new payloads.TranscriptContentInPayload(message.payload.data.body);
+					var contentIn = new payloads.TranscriptContentPayload(message.payload.data.body);
 					communication.routeMessage(
 						constants.COMMUNICATION_TARGET_TRANSCRIPT,
 						contentIn.getPayload(),

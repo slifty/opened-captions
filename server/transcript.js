@@ -41,7 +41,7 @@ function handleContent(data, socket) {
 		var content = lineBuffer.slice(0, lineBreakpoint);
 		lineBuffer = lineBuffer.slice(lineBreakpoint + 1);
 		
-		var contentOut = new payloads.TranscriptLineOutPayload(content);
+		var contentOut = new payloads.TranscriptLinePayload(content);
 		exports.sendPayload(
 			contentOut.getPayload(),
 			constants.COMMUNICATION_SOCKET_BROADCAST);
@@ -50,13 +50,13 @@ function handleContent(data, socket) {
 	if(wordBreakpoint != -1) {
 		var content = wordBuffer.slice(0, wordBreakpoint);
 		wordBuffer = wordBuffer.slice(wordBreakpoint + 1);
-		var contentOut = new payloads.TranscriptWordOutPayload(content);
+		var contentOut = new payloads.TranscriptWordPayload(content);
 		exports.sendPayload(
 			contentOut.getPayload(),
 			constants.COMMUNICATION_SOCKET_BROADCAST);
 	}
 	
-	var contentOut = new payloads.TranscriptContentOutPayload(data.body);
+	var contentOut = new payloads.TranscriptContentPayload(data.body);
 	exports.sendPayload(
 		contentOut.getPayload(),
 		constants.COMMUNICATION_SOCKET_BROADCAST);
@@ -79,4 +79,3 @@ exports.sendPayload = function(payload, sockets) {
 		payload,
 		sockets)
 };
-

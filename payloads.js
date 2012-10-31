@@ -11,10 +11,10 @@
 			}
 		};
 	};
-
-
+	
+	
 	// Module Payloads
-	exports.TranscriptContentInPayload = function(body) {
+	exports.TranscriptContentPayload = function(body) {
 		this.body = body;
 		this.getPayload = function() {
 			return {
@@ -25,20 +25,8 @@
 			}
 		};
 	};
-
-	exports.TranscriptContentOutPayload = function(body) {
-		this.body = body;
-		this.getPayload = function() {
-			return {
-				type: constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT,
-				data: {
-					body: this.body
-				}
-			}
-		};
-	};
-
-	exports.TranscriptLineInPayload = function(body) {
+	
+	exports.TranscriptLinePayload = function(body) {
 		this.body = body;
 		this.getPayload = function() {
 			return {
@@ -49,32 +37,8 @@
 			}
 		};
 	};
-
-	exports.TranscriptLineOutPayload = function(body) {
-		this.body = body;
-		this.getPayload = function() {
-			return {
-				type: constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_LINE,
-				data: {
-					body: this.body
-				}
-			}
-		};
-	};
-
-	exports.TranscriptWordInPayload = function(body) {
-		this.body = body;
-		this.getPayload = function() {
-			return {
-				type: constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_WORD,
-				data: {
-					body: this.body
-				}
-			}
-		};
-	};
-
-	exports.TranscriptWordOutPayload = function(body) {
+	
+	exports.TranscriptWordPayload = function(body) {
 		this.body = body;
 		this.getPayload = function() {
 			return {
