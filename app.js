@@ -147,9 +147,9 @@ for(var x in config.streams) {
 
 // Proxy Mode
 exports.proxies = [];
-for(x in config.proxy.targets) {
-	var proxy = config.proxy.targets[x];
-	ioProxy = ioClient.connect(config.proxy.location, {
+for(x in config.proxies) {
+	var proxy = config.proxies[x];
+	ioProxy = ioClient.connect(proxy.location, {
 		port: config.proxy.port,
 		'reconnect': true,
 		'reconnection delay': 5000,
@@ -157,8 +157,8 @@ for(x in config.proxy.targets) {
 	});
 	
 	ioProxy.on('connect', function() {
-		console.log("Connected to proxy: " + config.proxy.location + ":" + config.proxy.port);
-		ioProxy.emit('proxy', config.proxy.secret); // Let the server know you are a proxy
+		console.log("Connected to proxy: " + proxy.location + ":" + proxy.port);
+		ioProxy.emit('proxy', proxy.secret); // Let the server know you are a proxy
 		exports.proxies.push(ioProxy);
 	})
 	
