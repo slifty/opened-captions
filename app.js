@@ -3,9 +3,9 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , http = require('http')
-  , path = require('path');
+var express = require('express'),
+	http = require('http'),
+	path = require('path');
 
 var config = require('./config'),
 	constants = require('./constants'),
@@ -13,29 +13,38 @@ var config = require('./config'),
 
 var communication = require('./server/communication');
 
+
+// Configure the server
 var app = express(),
 	fs = require('fs'),
 	io = require('socket.io'),
 	ioClient = require('socket.io-client')
 
 app.configure(function(){
-  app.set('port', config.web.port);
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.static(path.join(__dirname, 'public')));
+	app.set('port', config.web.port);
+	app.use(express.favicon());
+	app.use(express.logger(config.web.logger));
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+	app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler());
+	app.use(express.errorHandler());
 });
 
+app.configure('production', function(){
+	app.use(express.errorHandler());
+});
+
+
+// Start the server
 var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log("Express server listening on port " + app.get('port'));
 });
 
 io = io.listen(server);
+
 
 // Shared Content
 app.get("/constants.js", function(req, res) { res.sendfile('./constants.js'); });

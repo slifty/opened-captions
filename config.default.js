@@ -15,6 +15,7 @@ config.proxy.location = "localhost";
 config.proxy.port = 0;
 config.proxy.secret = ""; // This should be kept private
 
+config.web.logger = "dev"; // Leave empty for production logging
 config.web.port = 3000;
 
 module.exports = config;
