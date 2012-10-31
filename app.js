@@ -120,5 +120,12 @@ for(x in config.proxy.targets) {
 }
 
 
+// Last resort error handler
+process.on('uncaughtException', function (err) {
+	console.error('An uncaught error occurred!');
+	console.error(err.stack);
+});
+
+
 // Exports
 exports.io = io;
