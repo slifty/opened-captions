@@ -150,7 +150,7 @@ exports.proxies = [];
 for(x in config.proxies) {
 	var proxy = config.proxies[x];
 	ioProxy = ioClient.connect(proxy.location, {
-		port: config.proxy.port,
+		port: proxy.port,
 		'reconnect': true,
 		'reconnection delay': 5000,
 		'max reconnection attempts': Infinity
