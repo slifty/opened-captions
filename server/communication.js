@@ -11,8 +11,10 @@ exports.receiveMessage = function(message, socket) {
 		return; // Invalid payload
 	
 	// Proxy the message
-	if(config.proxy.mode == constants.PROXY_MODE_ENABLED)
-		exports.sendMessage(message.target, message.payload, app.ioProxy)
+	for(var x in app.proxies) {
+		proxy = app.proxies[x];
+		exports.sendMessage(message.target, message.payload, proxy)
+	}
 	
 	// Route the message
 	switch(message.target) {
