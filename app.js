@@ -38,7 +38,7 @@ app.configure('production', function(){
 });
 
 
-// Start the server
+// Start the services
 var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log("Express server listening on port " + app.get('port'));
 });
@@ -46,22 +46,13 @@ var server = http.createServer(app).listen(app.get('port'), function() {
 io = io.listen(server);
 
 
-// Shared Content
-app.get("/constants.js", function(req, res) { res.sendfile('./constants.js'); });
-app.get("/payloads.js", function(req, res) { res.sendfile('./payloads.js'); });
-
-// Proxy 
+// Proxy
 exports.verifiedProxyIds = [];
+
 
 // Socket.IO Server
 io.set('log level', 1);
 io.sockets.on('connection', function (socket) {
-	socket.locale = constants.LOCALE_DEFAULT;
-
-	socket.on('locale', function (locale) {
-		socket.locale = locale;
-	});
-	
 	socket.on('message', function (payload) {
 		communication.receiveMessage(payload, socket);
 	});
@@ -114,8 +105,10 @@ if(config.stream.type == constants.STREAM_TYPE_SERIAL) {
 	});
 }
 
+
 // Proxy Mode
-if(config.proxy.mode == constants.PROXY_MODE_ENABLED) {
+for(x in config.proxy.targets) {
+	var proxy = config.proxy.targets[x];
 	ioProxy = ioClient.connect(config.proxy.location, {
 		port: config.proxy.port
 	});

@@ -42,10 +42,14 @@ Setting up the client and backend
 Starting the Server
 -------------
 
+**For Development**
 1. Using a terminal, navigate to the same directory as this README
 1. Start the node server
 
     node app
+
+**For Production**
+1. Do something more intelligent / robust.  For instance https://gist.github.com/715255, or https://github.com/nodejitsu/forever
 
 
 About the code
