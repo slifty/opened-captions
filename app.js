@@ -118,7 +118,7 @@ for(var x in config.streams) {
 			client = ioClient.connect(stream.location, {
 				port: stream.port,
 				reconnect: true,
-				'reconnection delay': 10000,
+				'reconnection delay': 500,
 				'max reconnection attempts': Infinity
 			});
 			client.on('connect', function() {
@@ -152,7 +152,7 @@ for(x in config.proxies) {
 	ioProxy = ioClient.connect(proxy.location, {
 		port: proxy.port,
 		'reconnect': true,
-		'reconnection delay': 5000,
+		'reconnection delay': 500,
 		'max reconnection attempts': Infinity
 	});
 	
@@ -163,7 +163,7 @@ for(x in config.proxies) {
 	})
 	
 	ioProxy.on('disconnect', function() {
-		console.log("Disconnected from a proxy: " + config.proxy.location + ":" + config.proxy.port);
+		console.log("Disconnected from a proxy: " + proxy.location + ":" + proxy.port);
 	})
 }
 
