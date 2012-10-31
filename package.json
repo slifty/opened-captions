@@ -1,16 +1,16 @@
 {
-	"author" : "Dan Schultz <a href="slifty@gmail.com">slifty@gmail.com</a>",
+	"author" : "Dan Schultz (slifty@gmail.com)",
 	"contributors" : [],
 	"dependencies": {
     	"express": "3.0.0rc5",
     	"jade": "*",
 		"node-uuid": "*",
-		"serialport": "*"
+		"serialport": "*",
 		"socket.io": "*",
 		"socket.io-client": "*"
 	},
 	"description": "A distributed API for closed captioning live-streams.",
-	"homepage" : "<a href="http://openedcaptions.com">http://openedcaptions.com</a>",
+	"homepage" : "http://openedcaptions.com",
 	"keywords" : ["captions", "real-time"],
 	"name": "opened-captions",
 	"repository" : {"type": "git", "url": "git://github.com/slifty/opened-captions.git"},
