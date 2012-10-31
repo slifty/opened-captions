@@ -115,16 +115,16 @@ for(var x in config.streams) {
 			break;
 		
 		case constants.STREAM_TYPE_SERVER:
-			ioClient = ioClient.connect(stream.location, {
+			client = ioClient.connect(stream.location, {
 				port: stream.port,
 				reconnect: true,
 				'reconnection delay': 10000,
 				'max reconnection attempts': Infinity
 			});
-			ioClient.on('connect', function() {
+			client.on('connect', function() {
 				console.log("Connected to stream");
 			});
-			ioClient.on('message', function(message) {
+			client.on('message', function(message) {
 				if(message.payload.type == constants.COMMUNICATION_TRANSCRIPT_PAYLOAD_CONTENT) {
 					var contentIn = new payloads.TranscriptContentInPayload(message.payload.data.body);
 					communication.routeMessage(
