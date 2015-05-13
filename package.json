@@ -2,6 +2,8 @@
   "name": "opened-captions",
   "version": "1.0.0",
   "dependencies": {
+    "mocha": "^2.2.4",
+    "should": "^6.0.1",
     "socket.io": "^1.3.5"
   },
   "description": "A distributed API for closed captioning live-streams.",
@@ -16,6 +18,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/slifty/opened-captions.git"
+  },
+  "scripts": {
+    "test": "make test"
   },
   "homepage": "http://openedcaptions.com",
   "author": "Dan Schultz <slifty@gmail.com> (http://slifty.com)",
