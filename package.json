@@ -2,6 +2,8 @@
   "name": "opened-captions",
   "version": "1.0.0",
   "dependencies": {
+    "express": "^4.12.3",
+    "lodash": "^3.8.0",
     "mocha": "^2.2.4",
     "should": "^6.0.1",
     "socket.io": "^1.3.5"
