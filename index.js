@@ -1,8 +1,7 @@
 'use strict'
 /**
   The entry point.
-  @module Sequelize
+  @module OpenedCaptions
 **/
 module.exports = require("./lib/opened-captions");
-
 
