@@ -3,6 +3,29 @@ OpenedCaptions: A distributed API for live TV closed captions.
 
 This version of Opened Captions is going to be designed as an npm package.  The first commit is pretty empty, but we have to start somewhere.
 
+Using the Server
+=============
+
+Creating an opened captions server is easy:
+
+```
+
+# Create the Server
+var OpenedCaptions = require('opened-captions');
+var oc = new OpenedCaptions();
+
+# Add a Stream
+oc.addStream('random');
+
+```
+
+Using the 
+
+Tools
+=============
+Tests are written in Mocha
+
+
 Licensing
 =============
 The MIT License (MIT)
