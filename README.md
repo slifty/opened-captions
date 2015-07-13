@@ -1,9 +1,23 @@
-OpenedCaptions: A distributed API for live TV closed captions.
+OpenedCaptions
+=============
+> A distributed API for live TV closed captions.
+
+This package can be easily incorproated into any node project in order to write code that knows what is happening on live television.
+
+Please be warned that the project is early in its development, which means the API and code base are generally unstable for the short term.
+
+Initially, this package is intended to power front-end applications, but eventually it will support server side events as well
+
+
+Installing Opened Captions
 =============
 
-This version of Opened Captions is going to be designed as an npm package.  The first commit is pretty empty, but we have to start somewhere.
+```shell
+npm install opened-captions
+```
 
-Using the Server
+
+Creating an Opened Captions Stream
 =============
 
 Creating an opened captions server is easy:
@@ -19,11 +33,12 @@ oc.addStream('random');
 
 ```
 
-Using the 
+You also can use (this example server)[https://github.com/slifty/opened-captions-example] to get started.
+
 
 Tools
 =============
-Tests are written in Mocha
+Tests are written in Mocha.
 
 
 Licensing
