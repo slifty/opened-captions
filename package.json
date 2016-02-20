@@ -1,18 +1,34 @@
 {
-	"author" : "Dan Schultz (slifty@gmail.com)",
-	"contributors" : [],
-	"dependencies": {
-    	"express": "3.0.0rc5",
-    	"jade": "*",
-		"node-uuid": "*",
-		"serialport": "*",
-		"socket.io": "*",
-		"socket.io-client": "*"
-	},
-	"description": "A distributed API for closed captioning live-streams.",
-	"homepage" : "http://openedcaptions.com",
-	"keywords" : ["captions", "real-time"],
-	"name": "opened-captions",
-	"repository" : {"type": "git", "url": "git://github.com/slifty/opened-captions.git"},
-	"version": "0.0.1"
+  "name": "opened-captions",
+  "version": "1.0.2",
+  "dependencies": {
+    "bluebird": "^2.9.25",
+    "express": "^4.12.3",
+    "lodash": "^3.8.0",
+    "mocha": "^2.2.4",
+    "node-uuid": "^1.4.3",
+    "should": "^6.0.1",
+    "socket.io": "^1.3.5",
+    "socket.io-client": "^1.3.5"
+  },
+  "devDependencies": {},
+  "description": "A distributed API for closed captioning live-streams.",
+  "main": "index.js",
+  "keywords": [
+    "captions",
+    "realtime",
+    "tv",
+    "video",
+    "transcript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/slifty/opened-captions.git"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "homepage": "http://openedcaptions.com",
+  "author": "Dan Schultz <slifty@gmail.com> (http://slifty.com)",
+  "license": "MIT"
 }
