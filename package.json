@@ -1,6 +1,6 @@
 {
   "name": "opened-captions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "dependencies": {
     "bluebird": "^2.9.25",
     "express": "^4.12.3",
@@ -11,8 +11,7 @@
     "socket.io": "^1.3.5",
     "socket.io-client": "^1.3.5"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "description": "A distributed API for closed captioning live-streams.",
   "main": "index.js",
   "keywords": [
