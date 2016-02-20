@@ -8,6 +8,12 @@ Please be warned that the project is early in its development, which means the A
 
 Initially, this package is intended to power front-end applications, but eventually it will support server side events as well
 
+New in 1.0
+=============
+Opened Captions used to be a standalone node app; you could download it and run it, which was fine for a quick hack but didn't make it particularly easy to use in your own code base.  Now Opened Captions is an NPM package.  See below for the new installation instructions.  You can also use the [example server](https://github.com/slifty/opened-captions-example) to get started.
+
+The architecture has been redone to make it easy to create new stream types.
+Payloads also include information about the stream itself, thus supporting multiple channels from a single server.
 
 Installing Opened Captions
 =============
@@ -31,9 +37,16 @@ var oc = new OpenedCaptions();
 # Add a Stream
 oc.addStream('random');
 
+# Add a Better Stream
+oc.addStream('server', {
+  host: 'https://openedcaptions.com',
+  port: 443,
+  description: "CSPAN"
+});
+
 ```
 
-You also can use (this example server)[https://github.com/slifty/opened-captions-example] to get started.
+You also can use [this example server](https://github.com/slifty/opened-captions-example) to get started.
 
 
 Tools
