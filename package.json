@@ -1,6 +1,6 @@
 {
   "name": "opened-captions",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "dependencies": {
     "bluebird": "^2.9.25",
     "express": "^4.12.3",
