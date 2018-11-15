@@ -2,7 +2,6 @@
   "name": "opened-captions",
   "version": "1.0.3",
   "dependencies": {
-    "bluebird": "^2.9.25",
     "socket.io": "^2.1.1",
     "uuid": "^3.0.0"
   },
