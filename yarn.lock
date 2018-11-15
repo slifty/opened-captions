@@ -596,7 +596,6 @@ setprototypeof@1.1.0:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
   integrity sha512-BvE/TwpZX4FXExxOxZyRGQQv651MSwmWKZGqvmPcRIjDqWub67kTKuIMx43cZZrS/cBBzwBcNDWoFxt2XEFIpQ==
 
-<<<<<<< HEAD
 should-equal@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/should-equal/-/should-equal-2.0.0.tgz#6072cf83047360867e68e98b09d71143d04ee0c3"
@@ -640,35 +639,6 @@ should@^13.2.3:
     should-type "^1.4.0"
     should-type-adaptors "^1.0.1"
     should-util "^1.0.0"
-=======
-should-equal@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/should-equal/-/should-equal-0.3.1.tgz#bd8ea97a6748e39fad476a3be6fd72ebc2e72bf0"
-  integrity sha1-vY6pemdI45+tR2o75v1y68LnK/A=
-  dependencies:
-    should-type "0.0.4"
-
-should-format@0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/should-format/-/should-format-0.0.7.tgz#1e2ef86bd91da9c2e0412335b56ababd9a2fde12"
-  integrity sha1-Hi74a9kdqcLgQSM1tWq6vZov3hI=
-  dependencies:
-    should-type "0.0.4"
-
-should-type@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/should-type/-/should-type-0.0.4.tgz#0132a05417a6126866426acf116f1ed5623a5cd0"
-  integrity sha1-ATKgVBemEmhmQmrPEW8e1WI6XNA=
-
-should@^6.0.1:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/should/-/should-6.0.3.tgz#daee30786a557662fbc774c008d7c58791edb1d9"
-  integrity sha1-2u4weGpVdmL7x3TACNfFh5Htsdk=
-  dependencies:
-    should-equal "0.3.1"
-    should-format "0.0.7"
-    should-type "0.0.4"
->>>>>>> 1479ed6... Disconnect socket listener in tests
 
 socket.io-adapter@~1.1.0:
   version "1.1.1"
