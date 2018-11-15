@@ -1,9 +1,9 @@
 {
   "name": "opened-captions",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "dependencies": {
     "socket.io": "^2.1.1",
-    "uuid": "^3.0.0"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
