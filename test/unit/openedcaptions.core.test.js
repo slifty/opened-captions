@@ -27,10 +27,12 @@ describe('The opened captions constructor', function() {
     var client = ioClient.connect('http://localhost:' + port);
 
     client.on('connect', function() {
+      client.disconnect();
       oc.close();
       done();
     });
     client.on('connect_error', function(e) {
+      client.disconnect();
       oc.close();
       done(e)
     });
