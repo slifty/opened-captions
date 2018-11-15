@@ -12,7 +12,7 @@ describe('The opened captions constructor', function() {
 
     // Check to make sure an io attribute was set
     oc.should.be.an.Object;
-    oc.should.have.enumerables(['io']);
+    oc.should.have.property(['io']);
     oc['io'].should.be.an.Object;
     oc.close();
     done();
