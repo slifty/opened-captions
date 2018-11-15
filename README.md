@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/slifty/opened-captions.png)](https://travis-ci.org/slifty/opened-captions)
+
 OpenedCaptions
 =============
 > A distributed API for live TV closed captions.
