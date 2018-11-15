@@ -18,6 +18,7 @@ describe('The abstract stream', function() {
     oc.addStream('abstract');
     var stream = oc.getStreams().pop();
     assert.not.exists(stream.getCursor("custom"));
+    oc.close();
     done();
   });
 
@@ -27,6 +28,7 @@ describe('The abstract stream', function() {
     var stream = oc.getStreams().pop();
     assert.exists(stream.getCursor("word"));
     stream.getCursor("word").should.equal(0);
+    oc.close();
     done();
   });
 
@@ -36,6 +38,7 @@ describe('The abstract stream', function() {
     var stream = oc.getStreams().pop();
     assert.exists(stream.getCursor("base"));
     stream.getCursor("base").should.equal(0);
+    oc.close();
     done();
   });
 
@@ -46,6 +49,7 @@ describe('The abstract stream', function() {
     stream.addCursor("custom");
     assert.exists(stream.getCursor("custom"));
     stream.getCursor("custom").should.equal(0);
+    oc.close();
     done();
   });
 
@@ -56,6 +60,7 @@ describe('The abstract stream', function() {
     stream.getCursor("base").should.equal(0);
     stream.incrementCursor("base",10);
     stream.getCursor("base").should.equal(10);
+    oc.close();
     done();
   });
 
@@ -66,6 +71,7 @@ describe('The abstract stream', function() {
     stream.getCursor("base").should.equal(0);
     stream.processContent("word");
     stream.getCursor("base").should.equal(4);
+    oc.close();
     done();
   });
 
@@ -76,6 +82,7 @@ describe('The abstract stream', function() {
     stream.getCursor("word").should.equal(0);
     stream.processContent("word");
     stream.getCursor("word").should.equal(0);
+    oc.close();
     done();
   });
 
@@ -91,6 +98,7 @@ describe('The abstract stream', function() {
     stream.getCursor("base").should.equal(9);
     stream.processContent(" and two more");
     stream.getCursor("base").should.equal(22);
+    oc.close();
     done();
   });
 
@@ -106,6 +114,7 @@ describe('The abstract stream', function() {
     stream.getCursor("word").should.equal(4);
     stream.processContent(" and two more");
     stream.getCursor("word").should.equal(18);
+    oc.close();
     done();
   });
 
@@ -121,6 +130,7 @@ describe('The abstract stream', function() {
     stream.getCursor("word").should.equal(4);
     stream.processContent("  and\n\n\ttwo more");
     stream.getCursor("word").should.equal(21);
+    oc.close();
     done();
   });
 
@@ -131,6 +141,7 @@ describe('The abstract stream', function() {
     
     stream.processContent("two\nwords");
     stream.getBuffer().should.equal("words");
+    oc.close();
     done();
   });
 
@@ -142,6 +153,7 @@ describe('The abstract stream', function() {
     stream.processContent("two\nwords");
     stream.getCursor("word").should.equal(0);
     stream.getCursor("base").should.equal(5);
+    oc.close();
     done();
   });
 

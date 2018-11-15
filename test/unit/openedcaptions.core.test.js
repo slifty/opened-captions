@@ -12,7 +12,7 @@ describe('The opened captions constructor', function() {
 
     // Check to make sure an io attribute was set
     oc.should.be.an.Object;
-    oc.should.have.enumerables(['io']);
+    oc.should.have.property(['io']);
     oc['io'].should.be.an.Object;
     oc.close();
     done();
@@ -27,10 +27,12 @@ describe('The opened captions constructor', function() {
     var client = ioClient.connect('http://localhost:' + port);
 
     client.on('connect', function() {
+      client.disconnect();
       oc.close();
       done();
     });
     client.on('connect_error', function(e) {
+      client.disconnect();
       oc.close();
       done(e)
     });
